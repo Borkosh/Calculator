@@ -40,15 +40,35 @@ public class Calculator extends JFrame {
 
         panelCenter.setLayout(gridLayoutButton);
 
-        for (int i = 0; i <btnDigits.size() ; i++) {
-            tempI=i;
+        for (int i = 0; i <10; i++) {
             btnDigits.get(i).addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    inputText.setText(inputText.getText()+ String.valueOf(tempI));
+                    inputText.setText(inputText.getText()+ e.getActionCommand());
                 }
             });
         }
+        // For BackSpace <<
+        btnDigits.get(10).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String buffText="";
+                if (!inputText.getText().isEmpty()) {
+                    buffText = inputText.getText().substring(0, inputText.getText().length() - 1);
+                }
+
+                inputText.setText(buffText);
+            }
+        });
+
+
+        // For Equally =
+        btnDigits.get(11).addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                inputText.setText(inputText.getText()+ e.getActionCommand());
+            }
+        });
 
 
         add(panelCenter, BorderLayout.CENTER);
